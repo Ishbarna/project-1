@@ -1,0 +1,90 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+class Calculator {
+    private:
+        double num1, num2;
+        double a, b, c;
+    public:
+        void arithmeticOperations() {
+            cout << "Enter first number: ";
+            cin >> num1;
+            cout << "Enter second number: ";
+            cin >> num2;
+            cout << "Addition: " << num1 + num2 << endl;
+            cout << "Subtraction: " << num1 - num2 << endl;
+            cout << "Multiplication: " << num1 * num2 << endl;
+            if (num2 != 0)
+                cout << "Division: " << num1 / num2 << endl;
+            else
+                cout << "Error! Division by zero is not allowed." << endl;
+        }
+
+        void solveLinearEquation() {
+            cout << "Enter coefficient of x (a): ";
+            cin >> a;
+            cout << "Enter constant term (b): ";
+            cin >> b;
+            if (a != 0)
+                cout << "Solution: x = " << -b / a << endl;
+            else if (b == 0)
+                cout << "Infinite solutions" << endl;
+            else
+                cout << "No solution" << endl;
+        }
+
+        void solveQuadraticEquation() {
+            cout << "Enter coefficient of x^2 (a): ";
+            cin >> a;
+            cout << "Enter coefficient of x (b): ";
+            cin >> b;
+            cout << "Enter constant term (c): ";
+            cin >> c;
+            double determinant = b * b - 4 * a * c;
+            if (determinant > 0) {
+                double root1 = (-b + sqrt(determinant)) / (2 * a);
+                double root2 = (-b - sqrt(determinant)) / (2 * a);
+                cout << "Roots: " << root1 << " and " << root2 << endl;
+            } else if (determinant == 0) {
+                double root = -b / (2 * a);
+                cout << "Root: " << root << endl;
+            } else {
+                double realPart = -b / (2 * a);
+                double imaginaryPart = sqrt(-determinant) / (2 * a);
+                cout << "Roots: " << realPart << " + " << imaginaryPart << "i and " << realPart << " - " << imaginaryPart << "i" << endl;
+            }
+        }
+
+        void displayMenu() {
+            cout << "1. Arithmetic Operations" << endl;
+            cout << "2. Solve Linear Equation" << endl;
+            cout << "3. Solve Quadratic Equation" << endl;
+            cout << "4. Exit" << endl;
+            int choice;
+            cin >> choice;
+            switch (choice) {
+                case 1:
+                    arithmeticOperations();
+                    break;
+                case 2:
+                    solveLinearEquation();
+                    break;
+                case 3:
+                    solveQuadraticEquation();
+                    break;
+                case 4:
+                    exit(0);
+                default:
+                    cout << "Invalid choice" << endl;
+            }
+        }
+};
+
+int main() {
+    Calculator calc;
+    while (true) {
+        calc.displayMenu();
+    }
+    return 0;
+}
